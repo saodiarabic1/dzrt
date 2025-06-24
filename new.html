@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجر الإقلاع</title>
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f4f4; }
+    header { background: white; padding: 10px 20px; display: flex; align-items: center; justify-content: flex-end; }
+    header img { height: 40px; }
+
+    .slider, .carousel {
+      width: 100%; max-height: 300px; overflow: hidden; position: relative; margin-bottom: 20px;
+    }
+    .slider img, .carousel img {
+      width: 100%; height: 300px; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1s ease-in-out;
+    }
+    .slider img.active, .carousel img.active {
+      opacity: 1; position: relative;
+    }
+
+    .content-section {
+      text-align: center; padding: 20px;
+    }
+    .content-section img {
+      width: 200px; height: auto; margin-bottom: 10px;
+    }
+    .content-section h2 {
+      font-size: 1.2em;
+    }
+
+    .carousel-text {
+      margin-top: 10px;
+      font-size: 1em;
+      font-weight: bold;
+    }
+
+    .discover-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://static.wixstatic.com/shapes/a0f951_59bae33a253b41d9aa1bcc7feae29bc4.svg" alt="Logo">
+  </header>
+
+  <div class="slider" id="imageSlider">
+    <img src="https://via.placeholder.com/1200x300/ff6666/fff?text=عرض+1" class="active">
+    <img src="https://via.placeholder.com/1200x300/66cc66/fff?text=عرض+2">
+    <img src="https://via.placeholder.com/1200x300/6699cc/fff?text=عرض+3">
+    <img src="https://via.placeholder.com/1200x300/f3c623/fff?text=عرض+4">
+  </div>
+
+  <div class="content-section">
+    <img src="https://via.placeholder.com/200x200?text=طريقة+جديدة" alt="طريقة جديدة">
+    <h2>اكتشف الطريقة الجديدة للإقلاع عن التدخين</h2>
+  </div>
+
+  <div class="carousel" id="imageCarousel">
+    <img src="https://via.placeholder.com/1200x300/cccccc/000?text=منتج+1" class="active" data-text="جهاز بديل للتدخين">
+    <img src="https://via.placeholder.com/1200x300/b2dfdb/000?text=منتج+2" data-text="نكهات متعددة">
+    <img src="https://via.placeholder.com/1200x300/ffe0b2/000?text=منتج+3" data-text="حلول بدون نيكوتين">
+    <div class="carousel-text" id="carouselText">جهاز بديل للتدخين</div>
+  </div>
+
+  <div style="text-align: center;">
+    <a href="#products" class="discover-btn">عرض المنتجات</a>
+  </div>
+
+  <script>
+    // Slider logic
+    const sliderImages = document.querySelectorAll('#imageSlider img');
+    let sliderIndex = 0;
+    setInterval(() => {
+      sliderImages[sliderIndex].classList.remove('active');
+      sliderIndex = (sliderIndex + 1) % sliderImages.length;
+      sliderImages[sliderIndex].classList.add('active');
+    }, 3000);
+
+    // Carousel logic with text
+    const carouselImages = document.querySelectorAll('#imageCarousel img');
+    const carouselText = document.getElementById('carouselText');
+    let carouselIndex = 0;
+    setInterval(() => {
+      carouselImages[carouselIndex].classList.remove('active');
+      carouselIndex = (carouselIndex + 1) % carouselImages.length;
+      carouselImages[carouselIndex].classList.add('active');
+      carouselText.textContent = carouselImages[carouselIndex].dataset.text;
+    }, 4000);
+  </script>
+</body>
+</html>

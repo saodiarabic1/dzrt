@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>متجر إلكتروني</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="form1.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+</head>
+<style>
+  #imgheed{ 
+width: 150px;
+margin-left: auto;
+}
+
+.header {
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+
+#botend{
+  background-color: rgb(23, 52, 147);
+}
+h3{
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+#address1 , #address2{
+  height: 45px;
+  font-size: 16px;
+  padding: 3px;
+}
+#textadres , #textadres1{
+  margin-bottom: 5px;
+}
+#adress{
+  height: 45px;
+  background-color: #ffffff;
+  color: #000;
+}
+</style>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <img id="imgheed"src="https://static.wixstatic.com/shapes/a0f951_59bae33a253b41d9aa1bcc7feae29bc4.svg" title="دزرت" alt="دزرت" width="150" height="50">
+    <div class="logo" id="loginot2"></div>
+    </div>
+  </div>
+
+  <div class="box-shadow">
+    <form id="form1">
+      <input type="text" name="name" id="userName" placeholder="الاسم" required>
+      <input type="tel" name="phone" placeholder="رقم الهاتف" required>
+      <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+
+      <h3 id="textadres1">عنوان التوصيل</h3>
+      <textarea name="address1" id="address1" placeholder="عنوان التوصيل" required></textarea>
+      <textarea name="address2" id="address2" placeholder="المحافظة" required></textarea>
+
+      <h3 id="textadres">موعد التوصيل</h3>
+      <select id="adress" name="delivery_time" required>
+        <option value="">اختر موعد التوصيل</option>
+        <option value="صباحًا">صباحًا</option>
+        <option value="مساءً">مساءً</option>
+      </select>
+
+      <button id="botend" type="submit">تأكيد العنوان</button>
+      <p id="texmom"></p>
+    </form>
+  </div>
+  <script src="main.html/null/null/null/form2.js"></script>
+
+  <script>
+
+</script>
+
+
+</body>
+</html>
